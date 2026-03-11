@@ -75,7 +75,7 @@ COLORS = {
 
 
 def generate_cover_html():
-    """封面图 HTML - 暗黑科技风格（视觉规划 v1.1 精修版）"""
+    """封面图 HTML - 饱满视觉风格（减少留白）"""
     return f"""
 <!DOCTYPE html>
 <html>
@@ -86,7 +86,11 @@ def generate_cover_html():
         body {{
             width: {IMAGE_CONFIG['width']}px;
             height: {IMAGE_CONFIG['height']}px;
-            background: radial-gradient(circle at 50% 40%, #1a1a1a 0%, {COLORS['bg']} 60%, #000000 100%);
+            background: 
+                radial-gradient(ellipse at 50% 0%, rgba(59, 130, 246, 0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(255, 51, 51, 0.18) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 80%, rgba(147, 51, 234, 0.15) 0%, transparent 55%),
+                linear-gradient(180deg, #0a0a0f 0%, #050505 50%, #000000 100%);
             font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
             overflow: hidden;
             display: flex;
@@ -96,187 +100,246 @@ def generate_cover_html():
             padding: 0;
             position: relative;
         }}
-        /* 动态网格背景 */
+        /* 网格背景 - 更明显 */
         .grid-bg {{
             position: absolute;
             width: 100%;
             height: 100%;
             background-image:
-                linear-gradient(rgba(74, 168, 255, 0.15) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(74, 168, 255, 0.15) 1px, transparent 1px);
-            background-size: 60px 60px;
+                linear-gradient(rgba(59, 130, 246, 0.12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.12) 1px, transparent 1px);
+            background-size: 50px 50px;
             z-index: 0;
         }}
-        /* 装饰圆环 */
+        /* 装饰圆环 - 更大更明显 */
         .ring {{
             position: absolute;
             border-radius: 50%;
-            border: 1px solid rgba(74, 168, 255, 0.4);
+            border: 2px solid;
             z-index: 1;
         }}
-        .ring-1 {{ width: 600px; height: 600px; top: -200px; right: -150px; opacity: 0.7; }}
-        .ring-2 {{ width: 400px; height: 400px; bottom: 100px; left: -100px; opacity: 0.5; border-color: rgba(181, 126, 220, 0.4); }}
-        .ring-3 {{ width: 300px; height: 300px; top: 300px; right: 50px; opacity: 0.4; border-color: rgba(45, 232, 255, 0.4); }}
-        /* 渐变光斑 */
+        .ring-1 {{ 
+            width: 800px; height: 800px; 
+            top: -300px; right: -200px; 
+            border-color: rgba(59, 130, 246, 0.25);
+            box-shadow: 0 0 60px rgba(59, 130, 246, 0.2);
+        }}
+        .ring-2 {{ 
+            width: 600px; height: 600px; 
+            bottom: -200px; left: -150px; 
+            border-color: rgba(147, 51, 234, 0.2);
+            box-shadow: 0 0 50px rgba(147, 51, 234, 0.15);
+        }}
+        .ring-3 {{ 
+            width: 400px; height: 400px; 
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            border-color: rgba(255, 51, 51, 0.15);
+            box-shadow: 0 0 80px rgba(255, 51, 51, 0.2);
+        }}
+        /* 渐变光斑 - 更大更亮 */
         .glow {{
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
+            filter: blur(60px);
             z-index: 0;
         }}
         .glow-1 {{
-            width: 450px; height: 450px;
-            top: -120px; left: -120px;
-            background: radial-gradient(circle, rgba(74, 168, 255, 0.5) 0%, transparent 70%);
+            width: 600px; height: 600px;
+            top: -200px; left: -150px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.35) 0%, transparent 65%);
         }}
         .glow-2 {{
-            width: 400px; height: 400px;
-            bottom: -80px; right: -80px;
-            background: radial-gradient(circle, rgba(181, 126, 220, 0.4) 0%, transparent 70%);
+            width: 500px; height: 500px;
+            bottom: -100px; right: -100px;
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.25) 0%, transparent 60%);
         }}
         .glow-3 {{
-            width: 300px; height: 300px;
-            top: 40%; left: 50%;
+            width: 450px; height: 450px;
+            top: 35%; left: 50%;
             transform: translateX(-50%);
-            background: radial-gradient(circle, rgba(255, 94, 110, 0.35) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 51, 51, 0.28) 0%, transparent 60%);
         }}
-        /* 浮动几何图形 */
+        /* 浮动几何图形 - 更大更明显 */
         .geo {{
             position: absolute;
             z-index: 1;
-            opacity: 0.3;
+            opacity: 0.5;
         }}
         .geo-1 {{
-            width: 80px; height: 80px;
-            top: 150px; left: 60px;
+            width: 120px; height: 120px;
+            top: 180px; left: 80px;
             background: linear-gradient(135deg, {COLORS['accent_cyan']}, {COLORS['accent_blue']});
-            border-radius: 20px;
+            border-radius: 24px;
             transform: rotate(15deg);
+            box-shadow: 0 10px 40px rgba(6, 182, 212, 0.4);
         }}
         .geo-2 {{
-            width: 60px; height: 60px;
-            bottom: 200px; right: 80px;
+            width: 90px; height: 90px;
+            bottom: 250px; right: 100px;
             background: linear-gradient(135deg, {COLORS['accent_purple']}, {COLORS['accent_red']});
             border-radius: 50%;
+            box-shadow: 0 10px 40px rgba(147, 51, 234, 0.4);
         }}
         .geo-3 {{
-            width: 40px; height: 40px;
-            top: 400px; right: 150px;
+            width: 60px; height: 60px;
+            top: 450px; right: 180px;
             background: linear-gradient(135deg, {COLORS['accent_orange']}, {COLORS['accent_red']});
-            border-radius: 10px;
+            border-radius: 14px;
             transform: rotate(45deg);
+            box-shadow: 0 8px 30px rgba(249, 115, 22, 0.4);
         }}
-        /* 角标 - 玻璃态风格 */
+        .geo-4 {{
+            width: 70px; height: 70px;
+            top: 280px; left: 120px;
+            background: linear-gradient(135deg, {COLORS['accent_blue']}, {COLORS['accent_purple']});
+            border-radius: 50%;
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+        }}
+        /* 角标 - 更大更明显 */
         .corner-badge {{
             position: absolute;
-            top: 40px;
-            right: 40px;
-            background: {COLORS['glass_bg']};
-            backdrop-filter: blur(10px);
-            border: 1px solid {COLORS['glass_border']};
+            top: 50px;
+            right: 50px;
+            background: linear-gradient(135deg, rgba(255, 51, 51, 0.25), rgba(249, 115, 22, 0.15));
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 51, 51, 0.5);
             color: {COLORS['accent_red']};
-            padding: 12px 24px;
-            border-radius: 20px;
-            font-size: 16px;
-            font-weight: 600;
-            letter-spacing: 2px;
+            padding: 16px 32px;
+            border-radius: 24px;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 3px;
             z-index: 10;
-            box-shadow: 0 8px 32px rgba(255, 71, 87, 0.2);
+            box-shadow: 
+                0 10px 40px rgba(255, 51, 51, 0.4),
+                inset 0 0 30px rgba(255, 51, 51, 0.1);
+            text-shadow: 0 0 20px rgba(255, 51, 51, 0.5);
         }}
-        /* Logo 容器 - 玻璃态 */
+        /* Logo 容器 - 更大更有视觉冲击力 */
         .logo-container {{
-            width: 220px;
-            height: 220px;
-            margin: 0 0 30px;
+            width: 280px;
+            height: 280px;
+            margin: 0 0 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: {COLORS['glass_bg']};
-            backdrop-filter: blur(20px);
-            border: 2px solid {COLORS['glass_border']};
-            border-radius: 35px;
+            background: linear-gradient(135deg, rgba(255, 51, 51, 0.15), rgba(59, 130, 246, 0.1));
+            backdrop-filter: blur(25px);
+            border: 3px solid rgba(255, 51, 51, 0.4);
+            border-radius: 45px;
             z-index: 10;
-            padding: 25px;
+            padding: 30px;
             box-shadow:
-                0 25px 80px rgba(255, 51, 51, 0.25),
-                inset 0 1px 0 rgba(255,255,255,0.1);
+                0 30px 100px rgba(255, 51, 51, 0.35),
+                0 0 80px rgba(255, 51, 51, 0.2),
+                inset 0 0 60px rgba(255, 51, 51, 0.1),
+                inset 0 1px 0 rgba(255,255,255,0.15);
         }}
         .logo-svg svg {{
             width: 100%;
             height: 100%;
-            filter: drop-shadow(0 0 30px {COLORS['accent_red']}99);
+            filter: drop-shadow(0 0 40px rgba(255, 51, 51, 0.8));
         }}
         .main-title {{
-            font-size: 72px;
+            font-size: 80px;
             font-weight: 800;
             color: {COLORS['text_primary']};
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             z-index: 10;
-            line-height: 1.15;
-            text-shadow: 0 4px 40px rgba(0,0,0,0.6);
-            letter-spacing: 2px;
+            line-height: 1.1;
+            text-shadow: 0 6px 50px rgba(0,0,0,0.7), 0 0 30px rgba(255,255,255,0.1);
+            letter-spacing: 4px;
         }}
         .main-title .highlight {{
             color: {COLORS['accent_red']};
-            background: linear-gradient(135deg, {COLORS['accent_red']}, #ff6b6b);
+            background: linear-gradient(135deg, {COLORS['accent_red']}, #ff6b6b, {COLORS['accent_orange']});
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 40px rgba(255, 51, 51, 0.5);
+            text-shadow: 0 0 50px rgba(255, 51, 51, 0.6);
+            filter: drop-shadow(0 0 20px rgba(255, 51, 51, 0.5));
         }}
         .sub-title {{
-            font-size: 34px;
+            font-size: 38px;
             color: {COLORS['text_secondary']};
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             line-height: 1.5;
             z-index: 10;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+            text-shadow: 0 3px 25px rgba(0,0,0,0.6);
+            letter-spacing: 2px;
         }}
         .divider {{
-            width: 180px;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, {COLORS['accent_red']}, {COLORS['accent_blue']}, transparent);
-            margin: 15px 0 30px;
+            width: 240px;
+            height: 5px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                {COLORS['accent_blue']} 20%, 
+                {COLORS['accent_red']} 50%, 
+                {COLORS['accent_purple']} 80%, 
+                transparent 100%);
+            margin: 12px 0 25px;
             z-index: 10;
-            border-radius: 2px;
-            box-shadow: 0 0 20px rgba(255, 51, 51, 0.5);
+            border-radius: 3px;
+            box-shadow: 0 0 30px rgba(255, 51, 51, 0.6), 0 0 60px rgba(59, 130, 246, 0.3);
         }}
-        /* 标签 - 玻璃态 */
+        /* 标签 - 更大更明显 */
         .tags {{
             display: flex;
-            gap: 14px;
+            gap: 16px;
             z-index: 10;
             flex-wrap: wrap;
             justify-content: center;
-            max-width: 85%;
-            margin-top: 10px;
+            max-width: 90%;
+            margin-top: 15px;
         }}
         .tag {{
-            background: {COLORS['glass_bg']};
-            backdrop-filter: blur(10px);
-            border: 1px solid {COLORS['glass_border']};
+            background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+            backdrop-filter: blur(15px);
+            border: 2px solid;
             color: {COLORS['text_primary']};
-            padding: 12px 24px;
-            border-radius: 22px;
-            font-size: 16px;
-            font-weight: 600;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            padding: 14px 28px;
+            border-radius: 26px;
+            font-size: 18px;
+            font-weight: 700;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.4);
+            letter-spacing: 1px;
         }}
-        .tag:nth-child(1) {{ border-color: rgba(59, 130, 246, 0.5); color: {COLORS['accent_blue']}; box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }}
-        .tag:nth-child(2) {{ border-color: rgba(255, 51, 51, 0.5); color: {COLORS['accent_red']}; box-shadow: 0 0 20px rgba(255, 51, 51, 0.3); }}
-        .tag:nth-child(3) {{ border-color: rgba(147, 51, 234, 0.5); color: {COLORS['accent_purple']}; box-shadow: 0 0 20px rgba(147, 51, 234, 0.3); }}
+        .tag:nth-child(1) {{ 
+            border-color: rgba(59, 130, 246, 0.6); 
+            color: {COLORS['accent_blue']}; 
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4), 0 6px 25px rgba(0,0,0,0.4);
+        }}
+        .tag:nth-child(2) {{ 
+            border-color: rgba(255, 51, 51, 0.6); 
+            color: {COLORS['accent_red']}; 
+            box-shadow: 0 0 30px rgba(255, 51, 51, 0.4), 0 6px 25px rgba(0,0,0,0.4);
+        }}
+        .tag:nth-child(3) {{ 
+            border-color: rgba(147, 51, 234, 0.6); 
+            color: {COLORS['accent_purple']}; 
+            box-shadow: 0 0 30px rgba(147, 51, 234, 0.4), 0 6px 25px rgba(0,0,0,0.4);
+        }}
     </style>
 </head>
 <body>
-    <!-- 背景光效 -->
+    <!-- 背景网格 -->
+    <div class="grid-bg"></div>
+    <!-- 背景光效 - 更大更明显 -->
     <div class="glow glow-1"></div>
     <div class="glow glow-2"></div>
     <div class="glow glow-3"></div>
-    <!-- 装饰圆环 -->
+    <!-- 装饰圆环 - 更明显 -->
     <div class="ring ring-1"></div>
     <div class="ring ring-2"></div>
+    <div class="ring ring-3"></div>
+    <!-- 浮动几何图形 -->
+    <div class="geo geo-1"></div>
+    <div class="geo geo-2"></div>
+    <div class="geo geo-3"></div>
+    <div class="geo geo-4"></div>
 
     <div class="corner-badge">AI 安全深度分析</div>
 
