@@ -1,0 +1,383 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw与IronClaw安全性深度对比研究报告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #FFFFFF;
+        }
+        .card {
+            background-color: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 1.25rem; /* 20px */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: hidden;
+            position: relative;
+        }
+        .card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        .highlight-gradient-blue {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0), rgba(59, 130, 246, 0.05));
+        }
+        .highlight-gradient-purple {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0), rgba(168, 85, 247, 0.05));
+        }
+        .highlight-gradient-amber {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0), rgba(245, 158, 11, 0.05));
+        }
+        .highlight-gradient-red {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0), rgba(239, 68, 68, 0.05));
+        }
+        .highlight-gradient-green {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0), rgba(34, 197, 94, 0.05));
+        }
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .number-highlight {
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div class="max-w-7xl mx-auto p-4 md:p-8">
+        <!-- 报告标题卡片 -->
+        <div class="card md:col-span-4 md:row-span-1 p-8 flex flex-col justify-center relative">
+            <div class="absolute top-0 left-0 w-full h-full highlight-gradient-blue"></div>
+            <div class="relative">
+                <div class="flex items-center space-x-4 mb-4">
+                    <i class="fa-solid fa-shield-halved text-3xl text-blue-500"></i>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-800">OpenClaw与IronClaw安全性深度对比研究报告</h1>
+                </div>
+                <p class="text-lg text-gray-600 max-w-4xl">全面剖析两大AI代理平台的安全架构、漏洞风险与防护策略，为用户提供安全决策参考。</p>
+            </div>
+        </div>
+
+        <!-- 核心数据概览 -->
+        <div class="card md:col-span-2 md:row-span-1 p-6 flex flex-col justify-center relative">
+            <div class="absolute top-0 left-0 w-full h-full highlight-gradient-red"></div>
+            <div class="relative">
+                <div class="flex items-center space-x-3 mb-2">
+                    <i class="fa-solid fa-bug text-2xl text-red-500"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">OpenClaw安全漏洞</h3>
+                </div>
+                <div class="flex space-x-6">
+                    <div>
+                        <p class="number-highlight text-4xl text-red-500">512</p>
+                        <p class="text-sm text-gray-500">发现漏洞总数</p>
+                    </div>
+                    <div>
+                        <p class="number-highlight text-4xl text-red-500">8</p>
+                        <p class="text-sm text-gray-500">关键漏洞</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card md:col-span-2 md:row-span-1 p-6 flex flex-col justify-center relative">
+            <div class="absolute top-0 left-0 w-full h-full highlight-gradient-amber"></div>
+            <div class="relative">
+                <div class="flex items-center space-x-3 mb-2">
+                    <i class="fa-solid fa-globe text-2xl text-amber-500"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">全球暴露实例</h3>
+                </div>
+                <div class="flex space-x-6">
+                    <div>
+                        <p class="number-highlight text-4xl text-amber-500">23万+</p>
+                        <p class="text-sm text-gray-500">公网暴露实例</p>
+                    </div>
+                    <div>
+                        <p class="number-highlight text-4xl text-amber-500">8.78万</p>
+                        <p class="text-sm text-gray-500">已发生数据泄露</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 平台简介 -->
+        <div class="card md:col-span-2 md:row-span-1 p-6 flex flex-col justify-center relative">
+            <div class="absolute top-0 left-0 w-full h-full highlight-gradient-purple"></div>
+            <div class="relative">
+                <div class="flex items-center space-x-3 mb-3">
+                    <i class="fa-solid fa-claw text-2xl text-purple-500"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">OpenClaw</h3>
+                    <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full">开源AI代理</span>
+                </div>
+                <p class="text-gray-600">2026年初爆发式增长的开源AI代理平台，GitHub星标数突破26万，实现"全自动任务执行"，但安全问题突出。</p>
+            </div>
+        </div>
+
+        <div class="card md:col-span-2 md:row-span-1 p-6 flex flex-col justify-center relative">
+            <div class="absolute top-0 left-0 w-full h-full highlight-gradient-green"></div>
+            <div class="relative">
+                <div class="flex items-center space-x-3 mb-3">
+                    <i class="fa-solid fa-robot text-2xl text-green-500"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">IronClaw</h3>
+                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">企业级安全平台</span>
+                </div>
+                <p class="text-gray-600">由Transformer架构共同发明人开发，用Rust语言重写的企业级安全与可观测性平台，作为智能代理网关提供全方位保护。</p>
+            </div>
+        </div>
+
+        <!-- 安全风险对比 -->
+        <div class="card md:col-span-4 md:row-span-2 p-6 flex flex-col relative">
+            <div class="absolute top-0 left-0 w-full h-full highlight-gradient-blue"></div>
+            <div class="relative">
+                <div class="flex items-center space-x-3 mb-6">
+                    <i class="fa-solid fa-chart-line text-2xl text-blue-500"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">安全风险对比分析</h3>
+                </div>
+                <div class="w-full h-[300px] md:h-[400px]">
+                    <canvas id="securityChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- 关键漏洞分析 -->
+        <div class="card md:col-span-4 md:row-span-1 p-6 relative">
+            <div class="absolute top-0 left-0 w-full h-full highlight-gradient-red"></div>
+            <div class="relative">
+                <div class="flex items-center space-x-3 mb-4">
+                    <i class="fa-solid fa-exclamation-triangle text-2xl text-red-500"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">关键漏洞CVE-2026-25253分析</h3>
+                    <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">CVSS评分8.8</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h4 class="font-medium text-red-800 mb-2">漏洞原理</h4>
+                        <p class="text-sm text-red-700">OpenClaw控制界面会从URL查询字符串获取gatewayUrl参数，自动建立WebSocket连接并发送认证令牌，无需用户确认。</p>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h4 class="font-medium text-red-800 mb-2">攻击方式</h4>
+                        <p class="text-sm text-red-700">攻击者创建恶意链接，诱导用户点击，窃取浏览器中存储的认证令牌，完全接管受害者的OpenClaw实例。</p>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h4 class="font-medium text-red-800 mb-2">影响范围</h4>
+                        <p class="text-sm text-red-700">超过17,500个暴露的OpenClaw实例受到影响，攻击者可窃取所有存储的API密钥、密码和OAuth令牌。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 技术架构对比 -->
+        <div class="card md:col-span-4 md:row-span-2 p-6 relative">
+            <div class="absolute top-0 left-0 w-full h-full highlight-gradient-purple"></div>
+            <div class="relative">
+                <div class="flex items-center space-x-3 mb-6">
+                    <i class="fa-solid fa-sitemap text-2xl text-purple-500"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">技术架构安全性对比</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- OpenClaw架构 -->
+                    <div class="border border-gray-200 rounded-xl p-5 bg-white">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <i class="fa-solid fa-claw text-xl text-purple-500"></i>
+                            <h4 class="text-lg font-semibold text-gray-800">OpenClaw架构</h4>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-start space-x-2">
+                                <i class="fa-solid fa-circle-xmark text-red-500 mt-1"></i>
+                                <span class="text-sm text-gray-600">使用TypeScript编写，存在内存安全风险</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fa-solid fa-circle-xmark text-red-500 mt-1"></i>
+                                <span class="text-sm text-gray-600">工具在共享进程中运行，缺乏有效隔离</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fa-solid fa-circle-xmark text-red-500 mt-1"></i>
+                                <span class="text-sm text-gray-600">敏感信息以明文形式存储在配置文件中</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fa-solid fa-circle-xmark text-red-500 mt-1"></i>
+                                <span class="text-sm text-gray-600">默认允许所有本地连接，缺乏访问控制</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fa-solid fa-circle-xmark text-red-500 mt-1"></i>
+                                <span class="text-sm text-gray-600">缺乏统一的权限管理框架</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- IronClaw架构 -->
+                    <div class="border border-gray-200 rounded-xl p-5 bg-white">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <i class="fa-solid fa-robot text-xl text-green-500"></i>
+                            <h4 class="text-lg font-semibold text-gray-800">IronClaw架构</h4>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-start space-x-2">
+                                <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                                <span class="text-sm text-gray-600">使用Rust语言编写，从根本上杜绝内存安全漏洞</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                                <span class="text-sm text-gray-600">实现WASM沙箱隔离，所有工具在独立容器中运行</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                                <span class="text-sm text-gray-600">加密凭证保险库，AES-256-GCM加密存储敏感信息</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                                <span class="text-sm text-gray-600">严格的端点白名单策略，限制网络访问</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                                <span class="text-sm text-gray-600">基于能力的权限模型，实现最小权限原则</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 安全修复建议 -->
+        <div class="card md:col-span-2 md:row-span-1 p-6 relative">
+            <div class="absolute top-0 left-0 w-full h-full highlight-gradient-amber"></div>
+            <div class="relative">
+                <div class="flex items-center space-x-3 mb-4">
+                    <i class="fa-solid fa-wrench text-2xl text-amber-500"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">紧急修复措施</h3>
+                </div>
+                <ul class="space-y-2">
+                    <li class="flex items-start space-x-2">
+                        <i class="fa-solid fa-arrow-up-right-dots text-amber-500 mt-1"></i>
+                        <span class="text-sm text-gray-700">立即升级到v2026.2.26或更高版本</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                        <i class="fa-solid fa-lock text-amber-500 mt-1"></i>
+                        <span class="text-sm text-gray-700">启用强认证机制，设置复杂密码</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                        <i class="fa-solid fa-network-wired text-amber-500 mt-1"></i>
+                        <span class="text-sm text-gray-700">限制访问来源，配置防火墙规则</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                        <i class="fa-solid fa-shield-halved text-amber-500 mt-1"></i>
+                        <span class="text-sm text-gray-700">实施最小权限原则，定期权限审计</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card md:col-span-2 md:row-span-1 p-6 relative">
+            <div class="absolute top-0 left-0 w-full h-full highlight-gradient-green"></div>
+            <div class="relative">
+                <div class="flex items-center space-x-3 mb-4">
+                    <i class="fa-solid fa-right-left text-2xl text-green-500"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">迁移至IronClaw建议</h3>
+                </div>
+                <ul class="space-y-2">
+                    <li class="flex items-start space-x-2">
+                        <i class="fa-solid fa-download text-green-500 mt-1"></i>
+                        <span class="text-sm text-gray-700">下载安装最新版本IronClaw</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                        <i class="fa-solid fa-database text-green-500 mt-1"></i>
+                        <span class="text-sm text-gray-700">备份OpenClaw配置和数据</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                        <i class="fa-solid fa-sliders text-green-500 mt-1"></i>
+                        <span class="text-sm text-gray-700">逐步迁移配置，验证功能</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                        <i class="fa-solid fa-cogs text-green-500 mt-1"></i>
+                        <span class="text-sm text-gray-700">启用所有安全功能，实施最佳实践</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 结论 -->
+        <div class="card md:col-span-4 md:row-span-1 p-6 flex items-center relative">
+            <div class="absolute top-0 left-0 w-full h-full highlight-gradient-blue"></div>
+            <div class="relative flex items-center space-x-6">
+                <i class="fa-solid fa-lightbulb text-4xl text-blue-500"></i>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">核心结论</h3>
+                    <p class="text-gray-600">OpenClaw存在系统性安全缺陷，不建议在生产环境使用。IronClaw通过Rust语言、WASM沙箱和加密凭证保险库等技术，提供了根本性的安全解决方案，是企业级AI代理的可靠选择。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 安全风险对比图表
+        const ctx = document.getElementById('securityChart').getContext('2d');
+        const securityChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['权限管理', '隐私保护', '代码安全', '网络防护', '数据加密', '审计监控'],
+                datasets: [
+                    {
+                        label: 'OpenClaw',
+                        data: [20, 15, 25, 30, 10, 20],
+                        backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                        borderColor: 'rgba(239, 68, 68, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(239, 68, 68, 1)',
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'IronClaw',
+                        data: [95, 90, 98, 85, 95, 90],
+                        backgroundColor: 'rgba(34, 197, 94, 0.2)',
+                        borderColor: 'rgba(34, 197, 94, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(34, 197, 94, 1)',
+                        pointRadius: 4
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        },
+                        pointLabels: {
+                            font: {
+                                size: 12,
+                                family: 'Inter'
+                            },
+                            color: '#374151'
+                        },
+                        ticks: {
+                            backdropColor: 'rgba(255, 255, 255, 0.75)',
+                            color: '#6b7280'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: 'Inter'
+                            },
+                            boxWidth: 15,
+                            padding: 20
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

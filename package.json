@@ -1,0 +1,19 @@
+{
+  "name": "social-work-flow-work-studio",
+  "version": "1.0.0",
+  "description": "AI 内容生产工作流 - 根目录",
+  "private": true,
+  "workspaces": [
+    ".claude/skills/*"
+  ],
+  "scripts": {
+    "test:image-finder": "node -e \"const finder = require('./.claude/skills/image-finder'); finder.searchImages('nature', { provider: 'pexels', per_page: 3 }).then(console.log).catch(console.error)\""
+  },
+  "devDependencies": {
+    "dotenv": "^16.6.1"
+  },
+  "dependencies": {
+    "playwright": "^1.58.2",
+    "sharp": "^0.34.5"
+  }
+}

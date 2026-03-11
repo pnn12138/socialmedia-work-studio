@@ -1,0 +1,34 @@
+{
+  "name": "image-finder-skill",
+  "version": "2.0.1",
+  "description": "AI 内容生成系统图片素材检索技能 - 支持多源 Provider 和 AI 生成",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js",
+    "test:pexels": "node -e \"const finder = require('./index'); finder.searchImages(process.argv[2] || 'nature', { provider: 'pexels', per_page: 5 }).then(console.log).catch(console.error)\"",
+    "test:unsplash": "node -e \"const finder = require('./index'); finder.searchImages(process.argv[2] || 'technology', { provider: 'unsplash', per_page: 5 }).then(console.log).catch(console.error)\"",
+    "test:pixabay": "node -e \"const finder = require('./index'); finder.searchImages(process.argv[2] || 'business', { provider: 'pixabay', per_page: 5 }).then(console.log).catch(console.error)\"",
+    "test:ai": "node -e \"const finder = require('./index'); finder.generateAIImage({ prompt: process.argv[2] || 'a cute robot', provider: 'auto' }).then(console.log).catch(console.error)\""
+  },
+  "keywords": [
+    "pexels",
+    "unsplash",
+    "pixabay",
+    "image-search",
+    "stock-photo",
+    "ai-image",
+    "dall-e",
+    "stable-diffusion",
+    "ai-content"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "node-fetch": "^2.7.0",
+    "pexels": "^1.4.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

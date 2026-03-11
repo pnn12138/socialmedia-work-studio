@@ -1,0 +1,234 @@
+{
+  "main": {
+    "id": "21454689ae3b3f54",
+    "type": "split",
+    "children": [
+      {
+        "id": "93b666f9af7bab8a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d0f71de0f694b73f",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "02_内容项目/审稿中/OpenClaw 安全性分析/fig/output/01_cover.png"
+              },
+              "icon": "lucide-image",
+              "title": "01_cover"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c51137507fe377d9",
+    "type": "split",
+    "children": [
+      {
+        "id": "e40ae7bcd7c087fa",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "45b03c67facd7281",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "1a7fabd3832d066f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "ab1469d613be72b2",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "626b16fb68ba9d91",
+    "type": "split",
+    "children": [
+      {
+        "id": "4a0450021e23e820",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "90b6d84fa6a635b5",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "02_内容项目/审稿中/OpenClaw 安全性分析/fig/output/01_cover.png",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "01_cover 的反向链接列表"
+            }
+          },
+          {
+            "id": "66838b9bc43171df",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "欢迎.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "欢迎 的出链列表"
+            }
+          },
+          {
+            "id": "3aef44b3e46828f6",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "161c1330880506d5",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "76f02a2ebdceaabd",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "欢迎.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "欢迎 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "bases:新建数据库": false,
+      "obsidian-kanban:创建新看板": false,
+      "command-palette:打开命令面板": false,
+      "terminal:Open terminal": false
+    }
+  },
+  "active": "d0f71de0f694b73f",
+  "lastOpenFiles": [
+    "generate_xhs_images.py.tmp.35992.1773220060823",
+    "__pycache__/generate_xhs_images.cpython-38.pyc",
+    "__pycache__",
+    "02_内容项目/审稿中/OpenClaw 安全性分析/fig/output/05_risk_matrix.png",
+    "02_内容项目/审稿中/OpenClaw 安全性分析/fig/output/04_attack_flow.png",
+    "02_内容项目/审稿中/OpenClaw 安全性分析/fig/output/03_timeline.png",
+    "02_内容项目/审稿中/OpenClaw 安全性分析/fig/output/02_architecture.png",
+    "02_内容项目/审稿中/OpenClaw 安全性分析/fig/output/01_cover.png",
+    "02_内容项目/审稿中/OpenClaw 安全性分析/fig/output/06_checklist.png",
+    "generate_xhs_images.py.tmp.35992.1773215656817",
+    "generate_xhs_images.py.tmp.35992.1773215214401",
+    "generate_xhs_images.py.tmp.35992.1773215114338",
+    "generate_xhs_images.py.tmp.35992.1773214954154",
+    "generate_xhs_images.py.tmp.35992.1773214618811",
+    "generate_xhs_images.py.tmp.35992.1773214529348",
+    "generate_xhs_images.py.tmp.35992.1773214410843",
+    "generate_xhs_images.py.tmp.35992.1773214125110",
+    "02_内容项目/审稿中/OpenClaw 安全性分析/fig/output/07_summary.png",
+    "02_内容项目/审稿中/OpenClaw 安全性分析/fig/定稿图/03_timeline.jpeg",
+    "02_内容项目/审稿中/OpenClaw 安全性分析/fig/定稿图/02_architecture.jpeg",
+    "02_内容项目/审稿中/OpenClaw 安全性分析/fig/定稿图/01_cover.jpeg",
+    "02_内容项目/审稿中/OpenClaw 安全性分析/OpenClaw 安全性分析_小红书适配稿.md",
+    "02_内容项目/审稿中/OpenClaw 安全性分析/OpenClaw 安全性分析_小红书.md",
+    "02_内容项目/审稿中/OpenClaw 安全性分析/xiaohongshu.md",
+    "02_内容项目/审稿中/OpenClaw 安全性分析/OpenClaw 安全性深度分析_母稿.md",
+    "02_内容项目/审稿中/OpenClaw 安全性分析/fig/visual_plan.md",
+    "node_modules/semver/README.md",
+    "node_modules/sharp/README.md",
+    "node_modules/@emnapi/runtime/README.md",
+    "node_modules/tslib/SECURITY.md",
+    "node_modules/tslib/README.md",
+    "-1_框架设计/1.md",
+    "-1_框架设计/新建 Markdown.md",
+    "ARCHITECTURE_UPGRADE_REPORT.md",
+    "ENV_CONFIG_COMPLETE.md",
+    "node_modules/dotenv/SECURITY.md",
+    "node_modules/dotenv/README.md",
+    "node_modules/dotenv/README-es.md",
+    "node_modules/dotenv/CHANGELOG.md",
+    "DRAWING_SKILLS_UPGRADE_SUMMARY.md",
+    "-1_框架设计/小红书adapter升级方案.md",
+    "-1_框架设计/xhs_image_pipeline_framework.md",
+    "-1_框架设计/绘图技能升级方案.md",
+    "-1_框架设计/图像升级方案.md",
+    "-1_框架设计/deep-research-report (2).md",
+    "02_内容项目/审稿中/OpenClaw 安全性分析/fig/素材状态.md"
+  ]
+}

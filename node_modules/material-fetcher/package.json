@@ -1,0 +1,21 @@
+{
+  "name": "material-fetcher",
+  "version": "0.1.0",
+  "description": "素材获取模块 - 从 GitHub、官网、小红书等渠道获取品牌资产、Logo、截图等素材",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "material",
+    "fetcher",
+    "logo",
+    "github",
+    "assets"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
