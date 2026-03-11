@@ -75,7 +75,7 @@ COLORS = {
 
 
 def generate_cover_html():
-    """封面图 HTML - 饱满视觉风格（减少留白）"""
+    """封面图 HTML - 饱满视觉风格（减少底部留白）"""
     return f"""
 <!DOCTYPE html>
 <html>
@@ -96,8 +96,8 @@ def generate_cover_html():
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 0;
+            justify-content: flex-start;
+            padding: 80px 50px 60px;
             position: relative;
         }}
         /* 网格背景 - 更明显 */
@@ -293,7 +293,7 @@ def generate_cover_html():
             flex-wrap: wrap;
             justify-content: center;
             max-width: 90%;
-            margin-top: 15px;
+            margin-bottom: 40px;
         }}
         .tag {{
             background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
@@ -321,6 +321,58 @@ def generate_cover_html():
             border-color: rgba(147, 51, 234, 0.6); 
             color: {COLORS['accent_purple']}; 
             box-shadow: 0 0 30px rgba(147, 51, 234, 0.4), 0 6px 25px rgba(0,0,0,0.4);
+        }}
+        /* 底部信息区 - 填充底部空间 */
+        .bottom-info {{
+            margin-top: auto;
+            width: 100%;
+            padding: 35px 40px;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.06) 100%);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }}
+        .info-row {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }}
+        .info-item {{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            color: {COLORS['text_secondary']};
+        }}
+        .info-icon {{
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, {COLORS['accent_blue']}, {COLORS['accent_purple']});
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+        }}
+        .info-value {{
+            font-weight: 600;
+            color: {COLORS['text_primary']};
+        }}
+        .bottom-tags {{
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }}
+        .mini-tag {{
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: {COLORS['text_secondary']};
+            padding: 6px 14px;
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: 500;
         }}
     </style>
 </head>
@@ -376,6 +428,38 @@ def generate_cover_html():
         <div class="tag">#AI 安全</div>
         <div class="tag">#网络安全</div>
         <div class="tag">#漏洞分析</div>
+    </div>
+
+    <!-- 底部信息区 - 填充底部空间，增加信息密度 -->
+    <div class="bottom-info">
+        <div class="info-row">
+            <div class="info-item">
+                <div class="info-icon">⚠️</div>
+                <span>CVE-2026-25253 高危漏洞</span>
+            </div>
+            <div class="info-value">CVSS 8.8</div>
+        </div>
+        <div class="info-row">
+            <div class="info-item">
+                <div class="info-icon">🔥</div>
+                <span>4.3 万实例暴露公网</span>
+            </div>
+            <div class="info-value">1.5 万可 RCE</div>
+        </div>
+        <div class="info-row">
+            <div class="info-item">
+                <div class="info-icon">📦</div>
+                <span>ClawHub 供应链污染</span>
+            </div>
+            <div class="info-value">1184 个欺诈技能</div>
+        </div>
+        <div class="bottom-tags">
+            <div class="mini-tag">ClawJacked</div>
+            <div class="mini-tag">远程代码执行</div>
+            <div class="mini-tag">权限滥用</div>
+            <div class="mini-tag">数据泄露</div>
+            <div class="mini-tag">2026.03 最新分析</div>
+        </div>
     </div>
 </body>
 </html>
