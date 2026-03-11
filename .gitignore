@@ -11,3 +11,15 @@ wheels/
 
 # Environment variables
 .env
+
+# Obsidian local settings (don't sync)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/appearance.json
+.obsidian/hotkeys.json
+.obsidian/plugins/terminal/
+.obsidian/plugins/obsidian-git/
+
+# System files
+.DS_Store
+Thumbs.db
