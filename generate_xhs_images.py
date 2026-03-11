@@ -25,7 +25,7 @@ from pathlib import Path
 from playwright.async_api import async_playwright
 
 # 配置
-OUTPUT_DIR = Path("02_内容项目/审稿中/OpenClaw 安全性分析/fig/output")
+OUTPUT_DIR = Path("02_内容项目/已发布/OpenClaw 安全性分析/fig/output")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # 主题色 - 色彩丰富、富有设计感的新配色（更明亮的版本）
@@ -50,13 +50,32 @@ COLORS = {
 # 图片配置
 IMAGE_CONFIG = {
     "width": 1080,
-    "height": 1920,  # 3:4 增加高度容纳内容
+    "height": 1920,  # 9:16 小红书标准比例
     "scale": 1  # 标准清晰度
+}
+
+# 色彩规范（更新为视觉规划要求的配色）
+COLORS = {
+    "bg": "#050505",              # 深黑背景
+    "bg_secondary": "#0a0a0a",     # 次级背景
+    "bg_gradient_start": "#050505",
+    "bg_gradient_end": "#0d0d0d",
+    "accent_red": "#FF3333",       # 高饱和暗红
+    "accent_blue": "#3B82F6",      # 科技蓝
+    "accent_purple": "#9333EA",    # 紫色
+    "accent_cyan": "#06B6D4",      # 青色
+    "accent_orange": "#F97316",    # 橙色
+    "accent_green": "#10B981",     # 绿色
+    "text_primary": "#FFFFFF",
+    "text_secondary": "#E5E5E5",
+    "border": "#374151",
+    "glass_bg": "rgba(255,255,255,0.08)",
+    "glass_border": "rgba(255,255,255,0.15)"
 }
 
 
 def generate_cover_html():
-    """封面图 HTML - 色彩丰富、富有设计感"""
+    """封面图 HTML - 暗黑科技风格（视觉规划 v1.1 精修版）"""
     return f"""
 <!DOCTYPE html>
 <html>
@@ -67,14 +86,14 @@ def generate_cover_html():
         body {{
             width: {IMAGE_CONFIG['width']}px;
             height: {IMAGE_CONFIG['height']}px;
-            background: linear-gradient(135deg, {COLORS['bg_gradient_start']} 0%, {COLORS['bg']} 50%, {COLORS['bg_secondary']} 100%);
+            background: radial-gradient(circle at 50% 40%, #1a1a1a 0%, {COLORS['bg']} 60%, #000000 100%);
             font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            padding-top: 160px;
+            justify-content: center;
+            padding: 0;
             position: relative;
         }}
         /* 动态网格背景 */
@@ -166,96 +185,98 @@ def generate_cover_html():
         }}
         /* Logo 容器 - 玻璃态 */
         .logo-container {{
-            width: 180px;
-            height: 180px;
-            margin-bottom: 40px;
+            width: 220px;
+            height: 220px;
+            margin: 0 0 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: {COLORS['glass_bg']};
             backdrop-filter: blur(20px);
             border: 2px solid {COLORS['glass_border']};
-            border-radius: 30px;
+            border-radius: 35px;
             z-index: 10;
-            padding: 20px;
+            padding: 25px;
             box-shadow:
-                0 20px 60px rgba(0,0,0,0.3),
+                0 25px 80px rgba(255, 51, 51, 0.25),
                 inset 0 1px 0 rgba(255,255,255,0.1);
         }}
         .logo-svg svg {{
             width: 100%;
             height: 100%;
-            filter: drop-shadow(0 0 20px {COLORS['accent_red']}66);
+            filter: drop-shadow(0 0 30px {COLORS['accent_red']}99);
         }}
         .main-title {{
-            font-size: 68px;
+            font-size: 72px;
             font-weight: 800;
             color: {COLORS['text_primary']};
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             z-index: 10;
-            line-height: 1.1;
-            text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+            line-height: 1.15;
+            text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+            letter-spacing: 2px;
         }}
         .main-title .highlight {{
             color: {COLORS['accent_red']};
-            background: linear-gradient(135deg, {COLORS['accent_red']}, {COLORS['accent_orange']});
+            background: linear-gradient(135deg, {COLORS['accent_red']}, #ff6b6b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: 0 0 40px rgba(255, 51, 51, 0.5);
         }}
         .sub-title {{
-            font-size: 30px;
+            font-size: 34px;
             color: {COLORS['text_secondary']};
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 35px;
             line-height: 1.5;
             z-index: 10;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
         }}
         .divider {{
-            width: 150px;
+            width: 180px;
             height: 4px;
-            background: linear-gradient(90deg, transparent, {COLORS['accent_cyan']}, {COLORS['accent_blue']}, {COLORS['accent_purple']}, transparent);
-            margin: 20px 0 40px;
+            background: linear-gradient(90deg, transparent, {COLORS['accent_red']}, {COLORS['accent_blue']}, transparent);
+            margin: 15px 0 30px;
             z-index: 10;
             border-radius: 2px;
+            box-shadow: 0 0 20px rgba(255, 51, 51, 0.5);
         }}
         /* 标签 - 玻璃态 */
         .tags {{
             display: flex;
-            gap: 12px;
+            gap: 14px;
             z-index: 10;
             flex-wrap: wrap;
             justify-content: center;
-            max-width: 80%;
+            max-width: 85%;
+            margin-top: 10px;
         }}
         .tag {{
             background: {COLORS['glass_bg']};
             backdrop-filter: blur(10px);
             border: 1px solid {COLORS['glass_border']};
             color: {COLORS['text_primary']};
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            padding: 12px 24px;
+            border-radius: 22px;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }}
-        .tag:nth-child(1) {{ border-color: rgba(52, 152, 219, 0.4); color: {COLORS['accent_blue']}; }}
-        .tag:nth-child(2) {{ border-color: rgba(155, 89, 182, 0.4); color: {COLORS['accent_purple']}; }}
-        .tag:nth-child(3) {{ border-color: rgba(255, 71, 87, 0.4); color: {COLORS['accent_red']}; }}
+        .tag:nth-child(1) {{ border-color: rgba(59, 130, 246, 0.5); color: {COLORS['accent_blue']}; box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }}
+        .tag:nth-child(2) {{ border-color: rgba(255, 51, 51, 0.5); color: {COLORS['accent_red']}; box-shadow: 0 0 20px rgba(255, 51, 51, 0.3); }}
+        .tag:nth-child(3) {{ border-color: rgba(147, 51, 234, 0.5); color: {COLORS['accent_purple']}; box-shadow: 0 0 20px rgba(147, 51, 234, 0.3); }}
     </style>
 </head>
 <body>
-    <div class="grid-bg"></div>
-    <div class="ring ring-1"></div>
-    <div class="ring ring-2"></div>
-    <div class="ring ring-3"></div>
+    <!-- 背景光效 -->
     <div class="glow glow-1"></div>
     <div class="glow glow-2"></div>
     <div class="glow glow-3"></div>
-    <div class="geo geo-1"></div>
-    <div class="geo geo-2"></div>
-    <div class="geo geo-3"></div>
+    <!-- 装饰圆环 -->
+    <div class="ring ring-1"></div>
+    <div class="ring ring-2"></div>
 
     <div class="corner-badge">AI 安全深度分析</div>
 
@@ -299,7 +320,7 @@ def generate_cover_html():
 
 
 def generate_architecture_html():
-    """架构图 HTML - 色彩丰富版（优化布局）"""
+    """架构图 HTML - 暗黑科技风格（视觉规划 v1.1）"""
     return f"""
 <!DOCTYPE html>
 <html>
@@ -310,9 +331,9 @@ def generate_architecture_html():
         body {{
             width: {IMAGE_CONFIG['width']}px;
             height: {IMAGE_CONFIG['height']}px;
-            background: linear-gradient(180deg, {COLORS['bg']} 0%, {COLORS['bg_secondary']} 100%);
+            background: radial-gradient(circle at 50% 30%, #121212 0%, {COLORS['bg']} 70%, #000000 100%);
             font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-            padding: 45px 60px;
+            padding: 40px 50px;
             display: flex;
             flex-direction: column;
             position: relative;
@@ -332,125 +353,126 @@ def generate_architecture_html():
         }}
         .header {{
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             z-index: 1;
         }}
         .title {{
-            font-size: 48px;
+            font-size: 52px;
             font-weight: 800;
             color: {COLORS['text_primary']};
-            margin-bottom: 12px;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            margin-bottom: 8px;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.6);
+            letter-spacing: 2px;
         }}
         .subtitle {{
-            font-size: 20px;
+            font-size: 22px;
             color: {COLORS['accent_blue']};
             font-weight: 600;
             letter-spacing: 1px;
+            text-shadow: 0 2px 15px rgba(59, 130, 246, 0.4);
         }}
         .diagram {{
             flex: 1;
             background: {COLORS['glass_bg']};
             backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 40px 35px;
+            border-radius: 28px;
+            padding: 35px 30px;
             border: 2px solid {COLORS['glass_border']};
             display: flex;
             flex-direction: column;
-            gap: 22px;
+            gap: 18px;
             z-index: 1;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.35);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.4);
         }}
         .gateway-box {{
-            background: linear-gradient(135deg, rgba(74, 168, 255, 0.3) 0%, rgba(74, 168, 255, 0.15) 100%);
-            border: 3px solid rgba(74, 168, 255, 0.7);
-            border-radius: 20px;
-            padding: 35px 25px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border: 3px solid rgba(59, 130, 246, 0.6);
+            border-radius: 24px;
+            padding: 40px 30px;
             text-align: center;
-            box-shadow: 0 12px 45px rgba(74, 168, 255, 0.3);
+            box-shadow: 0 15px 50px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255,255,255,0.1);
         }}
         .gateway-title {{
-            font-size: 36px;
+            font-size: 42px;
             font-weight: 800;
             color: {COLORS['text_primary']};
-            margin-bottom: 10px;
-            letter-spacing: 2px;
+            margin-bottom: 12px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
         }}
         .gateway-desc {{
-            font-size: 18px;
+            font-size: 20px;
             color: {COLORS['accent_blue']};
             font-weight: 600;
+            text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
         }}
         .arrow {{
             text-align: center;
-            font-size: 32px;
+            font-size: 36px;
             color: {COLORS['accent_cyan']};
-            text-shadow: 0 0 20px rgba(45, 232, 255, 0.7);
-            animation: pulse 2s ease-in-out infinite;
-        }}
-        @keyframes pulse {{
-            0%, 100% {{ opacity: 1; transform: scaleY(1); }}
-            50% {{ opacity: 0.7; transform: scaleY(1.1); }}
+            text-shadow: 0 0 25px rgba(6, 182, 212, 0.8);
+            margin: 5px 0;
         }}
         .capabilities {{
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
+            gap: 14px;
         }}
         .cap-item {{
-            background: rgba(255,255,255,0.1);
-            border: 2px solid rgba(255,255,255,0.18);
-            border-radius: 16px;
-            padding: 20px 16px;
+            background: rgba(255,255,255,0.06);
+            border: 2px solid rgba(255,255,255,0.12);
+            border-radius: 18px;
+            padding: 18px 14px;
             display: flex;
             align-items: center;
             gap: 14px;
             transition: all 0.3s ease;
         }}
         .cap-icon {{
-            width: 45px;
-            height: 45px;
+            width: 48px;
+            height: 48px;
             background: linear-gradient(135deg, {COLORS['accent_red']}, {COLORS['accent_orange']});
-            border-radius: 12px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
             color: {COLORS['text_primary']};
-            box-shadow: 0 6px 20px rgba(255, 94, 110, 0.5);
+            box-shadow: 0 6px 25px rgba(255, 51, 51, 0.5);
             flex-shrink: 0;
         }}
         .cap-text {{
-            font-size: 18px;
+            font-size: 19px;
             color: {COLORS['text_primary']};
             font-weight: 600;
             line-height: 1.3;
         }}
         .warning-bar {{
-            background: linear-gradient(90deg, rgba(255, 94, 110, 0.35) 0%, rgba(255, 179, 71, 0.25) 100%);
-            border: 3px solid rgba(255, 94, 110, 0.8);
-            border-radius: 16px;
-            padding: 20px 18px;
+            background: linear-gradient(90deg, rgba(255, 51, 51, 0.2) 0%, rgba(249, 115, 22, 0.15) 100%);
+            border: 3px solid rgba(255, 51, 51, 0.7);
+            border-radius: 18px;
+            padding: 18px 16px;
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-top: 8px;
-            box-shadow: 0 0 35px rgba(255, 94, 110, 0.4);
+            margin-top: 5px;
+            box-shadow: 0 0 40px rgba(255, 51, 51, 0.35);
         }}
         .warning-icon {{
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             background: linear-gradient(135deg, {COLORS['accent_red']}, {COLORS['accent_orange']});
             clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
             flex-shrink: 0;
-            box-shadow: 0 0 20px rgba(255, 94, 110, 0.8);
+            box-shadow: 0 0 25px rgba(255, 51, 51, 0.8);
         }}
         .warning-text {{
-            font-size: 19px;
+            font-size: 20px;
             color: {COLORS['accent_red']};
             font-weight: 700;
             letter-spacing: 1px;
+            text-shadow: 0 0 20px rgba(255, 51, 51, 0.5);
         }}
     </style>
 </head>
